@@ -23,11 +23,4 @@ public class Proyecto {
             @AttributeOverride(name = "fechaFin", column = @Column(name = "fecha_fin"))
     })
     private Periodo periodo;
-
-    // OneToMany
-    @OneToMany
-    @JoinColumn(
-            foreignKey = @ForeignKey(name = "FK_proyecto_empleados_proyecto_empleados")
-    )
-    private Set<ProyectoEmpleado> proyectoEmpleado;
 }

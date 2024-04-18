@@ -19,20 +19,4 @@ public class ProyectoEmpleado {
             @AttributeOverride(name = "fechaFin", column = @Column(name = "fecha_fin"))
     })
     private Periodo periodo;
-
-    // ManyToOne
-    @ManyToOne
-    @MapsId("idProyecto")
-    @JoinColumn(
-            name = "proyecto",
-            foreignKey = @ForeignKey(name = "FK_proyecto_empleado_proyecto_proyecto")
-    )
-    private Proyecto proyecto;
-    @ManyToOne
-    @MapsId("idEmpleado")
-    @JoinColumn(
-            name = "id_empleado",
-            foreignKey = @ForeignKey(name = "FK_proyecto_empleado_empleado_empleado")
-    )
-    private Empleado empleado;
 }

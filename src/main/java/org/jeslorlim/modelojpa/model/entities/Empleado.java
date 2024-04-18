@@ -55,12 +55,6 @@ public class Empleado{
     )
     private Usuario usuario;
 
-    // OneToMany
-    @OneToMany
-    @JoinColumn(
-            foreignKey = @ForeignKey(name = "FK_empleado_proyectos_proyecto_empleados")
-    )
-    private Set<ProyectoEmpleado> proyectoEmpleado;
     @OneToMany
     @JoinColumn(
             foreignKey = @ForeignKey(name = "FK_empleado_nomina_nominas")
@@ -76,6 +70,7 @@ public class Empleado{
     private Empleado jefe;
     @ManyToOne
     @JoinColumn(
+            name = "id_departamento",
             foreignKey = @ForeignKey(name = "FK_empleado_departamento_id_departamento")
     )
     private Departamento idDepartamento;

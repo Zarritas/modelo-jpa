@@ -30,11 +30,4 @@ public class Departamento {
             foreignKey = @ForeignKey(name = "FK_departamento_empleado_jefe")
     )
     private Empleado jefe;
-
-    // OneToMany
-    @OneToMany
-    @JoinColumn(
-            foreignKey = @ForeignKey(name = "FK_departamento_empleado_empleados")
-    )
-    private Set<Empleado> empleados;
 }

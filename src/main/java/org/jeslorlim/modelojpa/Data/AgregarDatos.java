@@ -41,10 +41,10 @@ public class AgregarDatos {
     @Autowired
     GrupoDeDesarrolloRepository grupoDeDesarrolloRepositorio;
 
-    @Bean
-    public void eliminaDepartamentos (){
-        departamentoRepositorio.deleteAll();
-    }
+//    @Bean
+//    public void eliminaDepartamentos (){
+//        departamentoRepositorio.deleteAll();
+//    }
 
     @Bean
     private void pueblaDepartamentos(){
@@ -126,8 +126,8 @@ public class AgregarDatos {
         pr2.setNombre("Proyecto 2");pr2.setPeriodo(per2);
         proyectoRepositorio.saveAll(List.of(pr1,pr2));
 
-        pe1.setProyecto(pr1);pe1.setEmpleado(e1);pe1.setRol("Rol 1");pe2.setId(new ProyectoEmpleadoKey(pr2.getId(),e2.getId()));
-        pe2.setProyecto(pr2);pe2.setEmpleado(e2);pe2.setRol("Rol 2");pe2.setId(new ProyectoEmpleadoKey(pr2.getId(),e2.getId()));
+        pe1.setRol("Rol 1");pe1.setId(new ProyectoEmpleadoKey(proyectoRepositorio.findIdByNombre(p1.getNombre()),empleadoRepositorio.findIdByPersona(p1)));
+        pe2.setRol("Rol 2");pe2.setId(new ProyectoEmpleadoKey(proyectoRepositorio.findIdByNombre(p2.getNombre()),empleadoRepositorio.findIdByPersona(p2)));
         proyectoEmpleadoRepositorio.saveAll(List.of(pe1,pe2));
 
         u1.setNombre("Usuario 1");u1.setClave("clave1");u1.setConfirmClave("clave1");
@@ -138,10 +138,9 @@ public class AgregarDatos {
         n2.setLiquido();
         nominaRepositorio.saveAll(List.of(n1,n2));
     }
-
-    @Bean
-    private void listaDepartamentos() {
-        System.err.println("Listado de departamentos");
-        departamentoRepositorio.findAll().forEach(System.err::println);
-    }
+//    @Bean
+//    private void listaEmpleados() {
+//        System.err.println("Listado de Empleados");
+//        empleadoRepositorio.findAll().forEach(System.err::println);
+//    }
 }
