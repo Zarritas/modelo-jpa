@@ -114,7 +114,7 @@ public class AgregarDatos {
 
 
         e1.setNombre("Luis");e1.setApellidos("Perez");e1.setFechaNacimiento(LocalDate.of(1980,1,1));e1.setGenero(Genero.Masculino);e1.setDireccion(dire1);e1.setIdDepartamento(d1);e1.setPeriodoContratacion(pc1);e1.setInformacionEconomica(ie1);
-        e2.setNombre("Manolo");e2.setApellidos("Perez");e2.setFechaNacimiento(LocalDate.of(1980,1,1));e2.setGenero(Genero.NoBinario);e2.setDireccion(dire2);e2.setIdDepartamento(d2);e2.setPeriodoContratacion(pc2);e2.setInformacionEconomica(ie2);
+        e2.setNombre("Manolo");e2.setApellidos("Perez");e2.setFechaNacimiento(LocalDate.of(1980,1,1));e2.setGenero(Genero.NoBinario);e2.setDireccion(dire2);e2.setIdDepartamento(d2);e2.setPeriodoContratacion(pc2);e2.setInformacionEconomica(ie2);e2.setJefe(e1);
         empleadoRepositorio.saveAll(List.of(e1,e2));
 
         n1.setAnio(2019);n1.setMes("Noviembre");n1.setEmpleado(e1);
@@ -162,7 +162,8 @@ public class AgregarDatos {
         System.err.println("Listado de Empleados");
         List<Empleado> empleados = empleadoRepositorio.findAll();
         for(Empleado e : empleados){
-            System.out.println(e);
+            if (e.getJefe() != null)
+                System.out.println(e.getJefe().getNombre()+" "+e.getNombre());
         };
         System.err.println("Listado de Nominas");
         nominaRepositorio.findAll().forEach(System.out::println);
