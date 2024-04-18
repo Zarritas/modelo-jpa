@@ -3,7 +3,7 @@ package org.jeslorlim.modelojpa.model.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -15,15 +15,16 @@ public class Nomina {
     private String mes;
     private int anio;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(
-            foreignKey = @ForeignKey(name = "FK_nomina_lineas_de_nomina_lineas_de_nomina")
+            name="id_empleado",
+            foreignKey = @ForeignKey(name = "FK_nomina_empleado_empleado")
     )
-    private List<LineaDeNomina> lineasDeNomina;
+    private Empleado empleado;
 
     private double liquido;
 
-    public void setLiquido() {
+    public void setLiquido(Set<LineaDeNomina> lineasDeNomina) {
         lineasDeNomina.forEach(ln -> liquido += ln.getImporte());
     }
 }

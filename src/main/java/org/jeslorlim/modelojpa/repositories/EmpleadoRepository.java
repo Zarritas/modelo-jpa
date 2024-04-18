@@ -10,8 +10,8 @@ import java.util.UUID;
 
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, UUID> {
-    Empleado findByPersona(Persona p1);
+    Empleado findByNombre(String nombre);
 
-    @Query("select e.id from Empleado e where e.persona = ?1")
-    UUID findIdByPersona(Persona p);
+    @Query("select e.id from Empleado e where e.nombre = ?1")
+    UUID findIdByNombre(String s);
 }

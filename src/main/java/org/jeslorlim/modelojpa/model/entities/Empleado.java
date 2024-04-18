@@ -7,13 +7,14 @@ import org.jeslorlim.modelojpa.model.enbedded.*;
 import java.time.LocalDate;
 import java.util.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "id_usuario", name = "UQ_empleado_id_usuario"),
         @UniqueConstraint(columnNames = "id_informacion_economica", name = "UQ_empleado_id_informacion_economica")
 })
 @AllArgsConstructor @NoArgsConstructor @Data
-public class Empleado{
+public class Empleado extends Persona{
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,14 +24,6 @@ public class Empleado{
     private boolean activo;
 
     // Embedded
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "nombre", column = @Column(nullable = false)),
-            @AttributeOverride(name = "apellidos", column = @Column(nullable = false)),
-            @AttributeOverride(name = "fechaNacimiento", column = @Column(nullable = false)),
-            @AttributeOverride(name = "genero", column = @Column(nullable = false))
-    })
-    private Persona persona;
     @Embedded
     private Direccion direccion;
     @Embedded
@@ -55,11 +48,11 @@ public class Empleado{
     )
     private Usuario usuario;
 
-    @OneToMany
-    @JoinColumn(
-            foreignKey = @ForeignKey(name = "FK_empleado_nomina_nominas")
-    )
-    private List<Nomina> nominas;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(
+//            foreignKey = @ForeignKey(name = "FK_empleado_nomina_nominas")
+//    )
+//    private Set<Nomina> nominas;
 
     // ManyToOne
     @ManyToOne
@@ -75,15 +68,6 @@ public class Empleado{
     )
     private Departamento idDepartamento;
 
-    // ManyToMany
-    @ManyToMany
-    @JoinTable(
-            name = "empleados_edicion",
-            joinColumns = @JoinColumn(name = "id_empleado"),
-            inverseJoinColumns = @JoinColumn(name = "id_edicion")
-    )
-    private Set<Edicion> edicionEstudiante = new HashSet<>();
-
     // Mapped by
 //    @ManyToMany(mappedBy = "empleados")
 //    private Set<GrupoDeDesarrollo> grupos;
@@ -93,9 +77,4 @@ public class Empleado{
 //    private Departamento idDepartamentoJefe;
 //    @OneToMany(mappedBy = "jefe")
 //    private Set<Empleado> subordinados;
-
-    // metodos geter y seter personalizados
-    public void setEdicionEstudiante(Edicion edicion) {
-        edicionEstudiante.add(edicion);
-    }
 }

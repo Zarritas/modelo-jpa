@@ -6,6 +6,7 @@ import org.jeslorlim.modelojpa.model.enbedded.*;
 
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(
         uniqueConstraints = @UniqueConstraint(
@@ -13,7 +14,7 @@ import java.util.UUID;
                 name = "UQ_becario_mentor")
 )
 @AllArgsConstructor @NoArgsConstructor @Data
-public class Becario{
+public class Becario extends Persona{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID idBecario;
@@ -21,14 +22,6 @@ public class Becario{
     private String centroEducativo;
 
     // Embedded
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "nombre", column = @Column(nullable = false)),
-            @AttributeOverride(name = "apellidos", column = @Column(nullable = false)),
-            @AttributeOverride(name = "fechaNacimiento", column = @Column(nullable = false)),
-            @AttributeOverride(name = "genero", column = @Column(nullable = false))
-    })
-    private Persona persona;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "tipoVia", column = @Column(name = "tipo_via_personal")),

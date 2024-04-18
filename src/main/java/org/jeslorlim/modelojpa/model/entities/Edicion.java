@@ -36,8 +36,4 @@ public class Edicion {
     )
     private CursoDeFormacion formacion;
 
-    // ManyToMany
-    @ManyToMany(mappedBy = "edicionEstudiante")
-    private Set<Empleado> estudiantes;
-
 }
